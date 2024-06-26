@@ -3772,6 +3772,13 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
     assert(pindexPrev != nullptr);
     const int nHeight = pindexPrev->nHeight + 1;
 
+    // Check for mandatory update
+    if (pindexPrev->nHeight + 1 >= consensusParams.nUpdateBlockHeight) {
+        if (block.nVersion < NEW_BLOCK_VERSION) {
+            return state.DoS(100, false, REJECT_INVALID, "bad-version", false, "Block version is outdated");
+        }
+    }
+    
     // Check proof of work
     const Consensus::Params& consensusParams = params.GetConsensus();
     if(Params().NetworkIDString() == CBaseChainParams::MAIN && nHeight <= 68589){
