@@ -25,17 +25,18 @@ struct FounderRewardStructure {
 };
 
 class FounderPayment {
+    // Existing members...
+    std::string newFounderAddress;
+    int updateBlockHeight;
 public:
-	FounderPayment(vector<FounderRewardStructure> rewardStructures = {}, int startBlock = 0, const string &address = DEFAULT_FOUNDER_ADDRESS) {
-		this->founderAddress = address;
-		this->startBlock = startBlock;
-		this->rewardStructures = rewardStructures;
-	}
-	~FounderPayment(){};
-	CAmount getFounderPaymentAmount(int blockHeight, CAmount blockReward);
-	void FillFounderPayment(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutFounderRet);
-	bool IsBlockPayeeValid(const CTransaction& txNew, const int height, const CAmount blockReward);
-	int getStartBlock() {return this->startBlock;}
+    // Modify the constructor to accept the new address and update block height
+    FounderPayment(std::vector<FounderRewardStructure> rewardStructures = {}, int startBlock = 0, const std::string &address = DEFAULT_FOUNDER_ADDRESS, const std::string &newAddress = "", int updateHeight = INT_MAX) {
+        this->founderAddress = address;
+        this->newFounderAddress = newAddress;
+        this->startBlock = startBlock;
+        this->rewardStructures = rewardStructures;
+        this->updateBlockHeight = updateHeight;
+    }
 private:
 	string founderAddress;
 	int startBlock;
