@@ -493,7 +493,7 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-	consensus.nUpdateBlockHeight = 230000; // Replace with the chosen block height
+	consensus.nUpdateBlockHeight = 250000; // Replace with the chosen block height
 	consensus.nSubsidyHalvingInterval = 210240; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
         consensus.nSmartnodePaymentsStartBlock = 5761; //
         consensus.nSmartnodePaymentsIncreaseBlock = 158000; // actual historical value
